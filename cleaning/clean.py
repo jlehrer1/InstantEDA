@@ -8,5 +8,3 @@ def impute_data(df: pd.DataFrame) -> pd.DataFrame:
         if df[column].isna().sum() != 0:
             df[column] = imputer.fit_transform(df[[column]])
     return df
-    
- 
