@@ -17,7 +17,11 @@ if __name__ == "__main__":
         raise NotADirectoryError("Directory does not exist or not a valid file path")
     
     df = pd.read_csv(args["input"])
+    
+    if (df.isnull().sum().sum() > 0):
+        key = input("Data contains missing values. Would you like to compute and continue? [Y/n]: ")
+    
+    df = clean.impute_data(df) if key.lower() == 'y' else quit()
+    
 
-    # impute the data
-    df = clean.impute_data(df)
 
