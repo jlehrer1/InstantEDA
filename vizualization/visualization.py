@@ -4,7 +4,19 @@ import plotly.graph_objects as go
 
 # RAW DATA METHODS
 def num_nan_plot(df: pd.DataFrame):
-    pass
+    num_nans = sum([True for idx, row in df.iterrows() if any(row.isnull())])
+    fig = go.Figure(
+        data=go.Bar(x=df.columns, y=(df.isnull().sum())),
+        layout=go.Layout(
+            title={
+                'text':'Number of NaN values in each column',
+                'y':0.9,
+                'x':0.5,
+                'xanchor':'center',
+                'yanchor':'top',
+            }
+        )
+    )
 
 def percent_nan_plot(df: pd.DataFrame):
     pass
