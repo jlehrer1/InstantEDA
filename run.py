@@ -21,7 +21,4 @@ if __name__ == "__main__":
     if (df.isnull().sum().sum() > 0):
         key = input("Data contains missing values. Would you like to compute and continue? [Y/n]: ")
     
-    df = clean.impute_data(df) if key.lower() == 'y' else quit()
-    
-
-
+    df_clean = clean.impute_data(df) if key.lower() == 'y' else quit()
