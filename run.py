@@ -1,6 +1,6 @@
 import os
 import argparse
-import pandas pd
+import pandas as pd
 
 from cleaning import clean
 
