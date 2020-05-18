@@ -8,7 +8,7 @@ def num_nan_plot(df: pd.DataFrame):
         data=go.Bar(x=df.columns, y=(df.isnull().sum())),
         layout=go.Layout(
             title={
-                'text':'Number of NaN Values in Each Column where DataFrame Shape is {}'.format(df.shape),
+                'text':'Number of NaN Values in Each Column',
                 'y':0.9,
                 'x':0.5,
                 'xanchor':'center',
@@ -22,7 +22,7 @@ def num_nan_plot(df: pd.DataFrame):
 
 def percent_nan_plot(df: pd.DataFrame):
     fig = go.Figure(
-        data=go.Bar(x=df.columns, y=(df.isnull().sum() / df.shape[0]) * 100),
+        data=go.Bar(x=df.columns, y=(df.isnull().sum() / df.shape[0])),
         layout=go.Layout(
             title={
                 'text':'Percent of NaN values in Each Column',
@@ -33,10 +33,11 @@ def percent_nan_plot(df: pd.DataFrame):
             },
             xaxis_title='Column',
             yaxis_title='Percent of NaN',
+            yaxis=dict(tickformat='.0%')
         )
     )
     return fig
-
+    
 # CLEAN DATA METHODS
 def generate_correlation_plot(df: pd.DataFrame):
     fig = go.Figure(
