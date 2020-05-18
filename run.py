@@ -3,7 +3,7 @@ import argparse
 import pandas as pd
 
 from cleaning import clean
-import visualization as v
+from visualization import visualization as v
 
 parser = argparse.ArgumentParser()
 # add other file types later
