@@ -3,7 +3,7 @@ import argparse
 import pandas as pd
 
 from cleaning import clean
-from visualization import visualization as v
+from visualization import visualization
 
 parser = argparse.ArgumentParser()
 # add other file types later
@@ -22,6 +22,15 @@ if __name__ == "__main__":
 
     df = pd.read_csv(args["input"])
 
-
+    num_nan_plot = visualization.num_nan_plot(df)
+    percent_nan_plot = visualization.percent_nan_plot(df)
 
     df_clean = clean.impute_data(df) if key.lower() == 'y' else quit()
+
+    corr_plot = visualization.corr_plot(df)
+
+    if args["write"] is not None:
+        try:
+            os.makedirs(args["write"])
+        except FileExistsError:
+            pass
