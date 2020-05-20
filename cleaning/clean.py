@@ -13,25 +13,6 @@ def _is_likely_categorical(df_col: pd.Series) -> bool:
 def _is_numeric(df_col: pd.Series) -> bool:
     return np.issubdtype(df_col.dtype, np.number) 
 
-# def _generate_dummies_with_warning(df_col: pd.Series, imputer):
-#     warnings.warn(
-#         "Column {} is likely categorical, creating dummies... run with categorical=False or categorical_subset=[column names] to disable".format(df_col.name))
-#     df_col = pd.get_dummies(data=df_col)
-#     df_col = imputer.fit_transform(df_col)
-
-def _impute_categorical(df, cols, warning):
-    catimpute = CategoricalImputer()
-    for column in cols:
-        if _is_likely_categorical(df[column]):
-                if warning == True:                     
-                    warnings.warn(
-                    "Column {} is likely categorical, creating dummies... run with categorical=False or categorical_subset=[column names] to disable".format(column)
-                    )
-
-                df[column] = catimpute.fit_transform(df[column])
-                df[column] = pd.get_dummies(data=df[column])
-    return df
-
 def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_subset: list = None) -> pd.DataFrame:
     """Imputes missing numerical or categorical values if the percentage of rows containing NaN's is > 5%.
     Else, returns a dataframe without those rows.
