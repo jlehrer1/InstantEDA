@@ -42,7 +42,7 @@ def percent_nan_plot(df: pd.DataFrame):
 def generate_correlation_plot(df: pd.DataFrame):
     fig = go.Figure(
     data=go.Heatmap(z=df.corr(), x=df.corr().columns, y=df.corr().columns, hoverongaps=False), 
-    layout=go.Layout(
+        layout=go.Layout(
         height=900,
         width=900,
         title={
