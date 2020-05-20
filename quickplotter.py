@@ -1,5 +1,4 @@
 import pandas as pd 
-import numpy as np 
 from visualization import visualization
 from cleaning import clean
 
@@ -17,6 +16,8 @@ class QuickPlotter:
 
         plots = {'num_nan': f1, 'percent_nan': f2, 'corr': f3}
 
+        
+        
 
 
 

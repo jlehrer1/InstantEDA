@@ -31,7 +31,7 @@ if __name__ == "__main__":
     percent_nan_plot = visualization.percent_nan_plot(df)
 
     df_clean = clean.impute_data(df)
-    corr_plot = visualization.corr_plot(df)
+    corr_plot = visualization.generate_correlation_plot(df)
 
     num_nan_plot.write_image(os.path.join(dir_w, 'num_nan.png'))
     percent_nan_plot.write_image(os.path.join(dir_w, 'percent_nan.png'))
