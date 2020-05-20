@@ -12,17 +12,18 @@ def _is_likely_categorical(df_col: pd.Series) -> bool:
 def _is_numeric(df_col: pd.Series) -> bool:
     return np.issubdtype(df_col.dtype, np.number) 
 
-def _impute_data(df: pd.DataFrame) -> pd.DataFrame:
+def _impute_data(df: pd.DataFrame, categorical: bool = True) -> pd.DataFrame:
     """Imputes missing numerical or categorical values if the percentage of rows containing NaN's is > 5%.
-    Else, drops bad rows.
+    Else, returns a dataframe without those rows.
         Usage:
         -------
         dataframe_no_nan = impute_data(dataframe_with_nan)
     """
     if df.isna().sum().sum() / df.shape[0] <= 0.05:
         return df.dropna()
-    knnimp = KNNImputer()
-    simpimp = SimpleImputer(strategy='most_frequent')
+    
+    knnimp = KNNImputer() # for numeric 
+    simpimp = SimpleImputer(strategy='most_frequent') # for categorical
 
     for column in df.columns:
         if df[column].isna().sum() != 0:
@@ -34,9 +35,10 @@ def _impute_data(df: pd.DataFrame) -> pd.DataFrame:
                 df[column].fillna(value='')
     return df
 
-def _drop_bad_dtypes(df: pd.DataFrame, categorical=False) -> pd.DataFrame:
+def _drop_bad_dtypes(df: pd.DataFrame, categorical: bool = True) -> pd.DataFrame:
     """Attempts to infer a type for each column. If this isn't possible, then drops the column.
     Also generates categorical variables when possible."""
+
     df = df.infer_objects()
     for col in df.columns:
         if _is_likely_categorical(df[col]) and not categorical:
@@ -56,4 +58,4 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
         ------
         prepared_data = clean(raw_data)
     """
-    pass
+    df = 
