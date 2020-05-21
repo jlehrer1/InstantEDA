@@ -8,10 +8,13 @@ from sklearn_pandas import CategoricalImputer
 # HELPER FUNCTIONS TO CLEAN DATA
 
 def _is_likely_categorical(df_col: pd.Series) -> bool:
+    """Heuristic method to check if column is likely categorical. If the ratio between the number of unique and
+    total number of rows is small (< 0.05) then the column might be categorical and can be one-hot encoded"""
     return df_col.nunique() / df_col.count() < 0.05
 
 def _is_numeric(df_col: pd.Series) -> bool:
-    return np.issubdtype(df_col.dtype, np.number) 
+    """Checks if the dtype of the given pd.Series is a subtype of np.number"""
+    return np.issubdtype(df_col.dtype, np.number)
 
 def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_subset: list = None) -> pd.DataFrame:
     """Imputes missing numerical or categorical values if the percentage of rows containing NaN's is > 5%.
@@ -32,7 +35,7 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
         warnings.warn("categorical_all and subset both specified ... using subset and continuing")
         categorical_all = False
 
-    if categorical_all: #means subset is None
+    if categorical_all:
         for column in cols_to_use:
             if _is_likely_categorical(df[column]):
                 warnings.warn(
