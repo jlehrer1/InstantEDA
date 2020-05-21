@@ -39,9 +39,9 @@ def percent_nan_plot(df: pd.DataFrame):
         )
     )
     return fig
-    ws
+    
 # CLEAN DATA METHODS
-def generate_correlation_plot(df: pd.DataFrame):
+def correlation_plot(df: pd.DataFrame):
     if df.isna().sum().sum() > 0:
         warnings.warn("DataFrame contains NaN values, correlations will be infinite")
     fig = go.Figure(
@@ -57,3 +57,7 @@ def generate_correlation_plot(df: pd.DataFrame):
         }
     ))
     return fig
+
+def pairwise_plot(df: pd.DataFrame):
+    pass 
+
