@@ -5,7 +5,17 @@ To guarantee you are using the correct packages, run `pip install -r requirement
 
 Usage:
 ```python3
->>>test
+plotter = quickplotter.QuickPlotter(df: pd.DataFrame) #creates a QuickPlotter object with the given DataFrame
+```
+
+Attributes:
+```python3
+self.plotlist 
+>>> {
+            'common': ['num_nan', 'percent_nan', 'correlation'],
+            'pairwise': [],
+            'variance': []
+        }
 ```
 
 Ideas so far:
