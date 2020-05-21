@@ -1,4 +1,5 @@
-# Instant EDA (WIP)
+# Instant EDA 
+## Work in progress :)
 Instantly generate common exploratory data plots.
 
 To guarantee you are using the correct packages, run `pip install -r requirements.txt`.
