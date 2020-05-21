@@ -13,19 +13,19 @@ class QuickPlotter:
             'variance': []
         }
 
-    def _get_plots(self):
-        df1 = visualization.num_nan_plot(self.df)
-        df2 = visualization.percent_nan_plot(self.df)
-        df3 = visualization.correlation_plot(self.df_clean)
+    # def _get_plots(self):
+    #     df1 = visualization.num_nan_plot(self.df)
+    #     df2 = visualization.percent_nan_plot(self.df)
+    #     df3 = visualization.correlation_plot(self.df_clean)
 
-        return {
-            'num_nan': df1,
-            'percent_nan': df2,
-            'correlation': df3,
-        }
+    #     return {
+    #         'num_nan': df1,
+    #         'percent_nan': df2,
+    #         'correlation': df3,
+    #     }
 
     def _plot(self, plots: list):
-        all_plots = self._get_plots()
+        all_plots = self.plotlist['common']
         for plot in plots:
             all_plots[plot].show()
 
