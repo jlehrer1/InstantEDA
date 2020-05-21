@@ -32,9 +32,9 @@ class QuickPlotter:
         elif subset is not None and set(subset).issubset(set(self.plotlist)):
             self._plot(subset)
         elif diff is not None and set(diff).issubset(set(self.plotlist)):
-            self._plot(diff)
+            self._plot(list(set(self.plotlist) - set(diff)))
         else:
-            raise ValueError("subset or diff contains improper values")
+            raise ValueError("subset or diff contains improper values. Check plotlist attribute for appropriate values")
     
     def pairwise(self, subset: list = None, diff: list = None):
         pass 
