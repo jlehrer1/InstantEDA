@@ -9,7 +9,7 @@ class QuickPlotter:
         self.df_clean = clean.clean(df) #add ability to change params later
         self.plotlist = ['num_nan', 'percent_nan', 'correlation']
 
-    def _get_plotlist(self):
+    def _get_plots(self):
         df1 = visualization.num_nan_plot(self.df)
         df2 = visualization.percent_nan_plot(self.df)
         df3 = visualization.generate_correlation_plot(self.df_clean)
@@ -20,20 +20,24 @@ class QuickPlotter:
             'correlation': df3,
         }
 
-    def plot_all(self):
-        plots = self._get_plotlist()
+    def _plot(self, plots: list):
+        all_plots = self._get_plots()
         for plot in plots:
-            plots[plot].show()
-    
-    def plot(self, subset: list = None, diff: list = None):
-        to_plot = []
+            all_plots[plot].show()
+
+    def common(self, subset: list = None, diff: list = None):
         if subset is None and diff is None:
             # plot is called without subset/diff specified, just plot all
-            self.plot_all()
+            self._plot(self.plotlist)
         elif subset is not None and set(subset).issubset(set(self.plotlist)):
-            pass
+            self._plot(subset)
         elif diff is not None and set(diff).issubset(set(self.plotlist)):
-            pass
+            self._plot(diff)
         else:
-            # 
             raise ValueError("subset or diff contains improper values")
+    
+    def pairwise(self, subset: list = None, diff: list = None):
+        pass 
+
+    def variance(self, subset: list = None, diff: list = None):
+        pass
