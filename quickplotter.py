@@ -9,23 +9,21 @@ class QuickPlotter:
         self.df_clean = clean.clean(df) #add ability to change params later
         self.plotlist = {
             'common': ['num_nan', 'percent_nan', 'correlation'],
-            'pairwise': [],
+            'pairwise': ['pairwise'],
             'variance': []
         }
 
-    # def _get_plots(self):
-    #     df1 = visualization.num_nan_plot(self.df)
-    #     df2 = visualization.percent_nan_plot(self.df)
-    #     df3 = visualization.correlation_plot(self.df_clean)
-
-    #     return {
-    #         'num_nan': df1,
-    #         'percent_nan': df2,
-    #         'correlation': df3,
-    #     }
-
     def _plot(self, plots: list):
-        all_plots = self.plotlist['common']
+        df1 = visualization.num_nan_plot(self.df)
+        df2 = visualization.percent_nan_plot(self.df)
+        df3 = visualization.correlation_plot(self.df_clean)
+
+        all_plots = {
+            'num_nan': df1,
+            'percent_nan': df2,
+            'correlation': df3,
+        }
+
         for plot in plots:
             all_plots[plot].show()
 
@@ -45,14 +43,21 @@ class QuickPlotter:
         else:
             raise ValueError("subset or diff contains improper values. Check plotlist attribute for appropriate values")
     
-    def pairwise(self, subset: list = None, diff: list = None):
+    def pairwise(self, feature_subset: list = None, feature_diff: list = None):
         """Plots each feature X_i against X_j
             Parameters
             ------
             subset: subset of features to plot
             diff: plot all features except those in diff
         """
-        pass 
+        if feature_subset is None and feature_diff is None:
+            visualization.pairwise_plot(self.df_clean, self.df_clean.columns).show()
+        elif feature_subset is not None and set(feature_subset).issubset(set(self.df.columns)):
+            visualization.pairwise_plot(self.df_clean, feature_subset).show()
+        elif feature_diff is not None and set(feature_diff).issubset(set(self.df.columns)):
+            visualization.pairwise_plot(self.df_clean, list(set(self.df_clean.columns)) - set(feature_diff)).show()
+        else:
+            raise ValueError("feature_subset or feature_diff contain values that are not column names")        
 
     def variance(self, subset: list = None, diff: list = None):
         """"""
