@@ -43,6 +43,7 @@ def percent_nan_plot(df: pd.DataFrame):
     
 # CLEAN DATA METHODS
 def correlation_plot(df: pd.DataFrame):
+    """Returns correlation plot for all features in given DataFrame"""
     if df.isna().sum().sum() > 0:
         warnings.warn("DataFrame contains NaN values, correlations are not well defined")
     fig = go.Figure(
@@ -60,9 +61,14 @@ def correlation_plot(df: pd.DataFrame):
     return fig
 
 def pairwise_plot(df: pd.DataFrame, cols: list):
+    """Returns pairplot for features listed in cols parameter"""
     fig = go.Figure(
-        data=go.Splom(dimensions=[{'label': i, 'values': df[i]} for i in cols]),
-        layout=go.Layout(width=len(cols) * 41, height=len(df.columns) * 41),
+        data=go.Splom(
+            dimensions=[{'label': i, 'values': df[i]} for i in cols],
+        ),
+        layout=go.Layout(            
+            title='Pairwise Matrix Plot',
+        )
     )
     return fig
 

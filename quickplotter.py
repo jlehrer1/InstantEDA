@@ -10,7 +10,7 @@ class QuickPlotter:
         self.plotlist = {
             'common': ['num_nan', 'percent_nan', 'correlation'],
             'pairwise': ['pairwise'],
-            'variance': []
+            'distribution': ['dist']
         }
 
     def _plot(self, plots: list):
@@ -30,6 +30,7 @@ class QuickPlotter:
     def common(self, subset: list = None, diff: list = None):
         """Plots common EDA plots.
             Parameters:
+            ----------
                 subset: subset of common plots to show
                 diff: plot all common plots except those in diff, i.e. {all plots}\\{diff}
             """
@@ -46,7 +47,7 @@ class QuickPlotter:
     def pairwise(self, feature_subset: list = None, feature_diff: list = None):
         """Plots each feature X_i against X_j
             Parameters
-            ------
+            ---------
             subset: subset of features to plot
             diff: plot all features except those in diff
         """
@@ -55,7 +56,7 @@ class QuickPlotter:
         elif feature_subset is not None and set(feature_subset).issubset(set(self.df.columns)):
             visualization.pairwise_plot(self.df_clean, feature_subset).show()
         elif feature_diff is not None and set(feature_diff).issubset(set(self.df.columns)):
-            visualization.pairwise_plot(self.df_clean, list(set(self.df_clean.columns)) - set(feature_diff)).show()
+            visualization.pairwise_plot(self.df_clean, list(set(self.df_clean.columns) - set(feature_diff))).show()
         else:
             raise ValueError("feature_subset or feature_diff contain values that are not column names")        
 
