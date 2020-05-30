@@ -61,5 +61,5 @@ class QuickPlotter:
             raise ValueError("feature_subset or feature_diff contain values that are not column names")        
 
     def variance(self, subset: list = None, diff: list = None):
-        """"""
+        """Plots pairwise variance"""
         pass
