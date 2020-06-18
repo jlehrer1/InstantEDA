@@ -3,7 +3,6 @@ import pandas as pd
 from visualization import visualization
 from cleaning import clean
 
-
 class QuickPlotter:
     def __init__(self, df: pd.DataFrame, categorical = True, categorical_subset = None):
         self.df = df
@@ -13,6 +12,10 @@ class QuickPlotter:
             'pairwise': ['pairwise'],
             'distribution': ['dist']
         }
+
+    #--------------------------------------------------
+    # Wrapper functions for the visualization module
+    #--------------------------------------------------
 
     def _plot(self, plots: list):
         df1 = visualization.num_nan_plot(self.df)
@@ -29,7 +32,10 @@ class QuickPlotter:
             all_plots[plot].show()
 
     def _validity_check(self, subset, diff, subset_columns, diff_columns):
-
+        """
+        Checks each parameter in the QuickPlotter object's methods. 
+        It is a private function which will not be of much use outside of the specified functions.
+        """
         # Checks for subset/diff
         # ------------------------------------------
         plotlist = self.plotlist
@@ -63,7 +69,8 @@ class QuickPlotter:
             )
 
     def common(self, subset: list = None, diff: list = None, subset_columns: list = None, diff_columns: list = None):
-        """Plots common EDA plots.
+        """
+        Plots common EDA plots.
             Parameters:
             ----------
                 subset: subset of common plots to show
@@ -80,7 +87,8 @@ class QuickPlotter:
             self._plot(list(set(self.plotlist) - set(diff)))
 
     def pairwise(self, subset: list = None, diff: list = None, subset_columns: list = None, diff_columns: list = None):
-        """Plots each feature X_i against X_j
+        """
+        Plots each feature X_i against X_j, i=1,...,length(X.columns)
             Parameters
             ---------
                 subset: subset of features to plot
@@ -97,7 +105,8 @@ class QuickPlotter:
             visualization.pairwise_plot(self.df_clean, list(
                 set(self.df_clean.columns) - set(diff))).show()
 
-    # def variance(self, subset: list = None, diff: list = None):
+
+    # def variance(self, subset: list = None, diff: list = None, subset_columns: list = None, diff_columns: list = None):
     #     """Plots pairwise variance"""
     #     self._validity_check(subset, diff)
         
