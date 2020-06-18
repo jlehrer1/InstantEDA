@@ -7,7 +7,9 @@ import warnings
 # RAW DATA METHODS
 
 
-def num_nan_plot(df: pd.DataFrame):
+def num_nan_plot(df: pd.DataFrame, cols: list = None):
+    if cols is not None:
+        df = df[[cols]]
     fig = go.Figure(
         data=go.Bar(x=df.columns, y=(df.isnull().sum())),
         layout=go.Layout(
@@ -25,8 +27,9 @@ def num_nan_plot(df: pd.DataFrame):
     )
     return fig
 
-
-def percent_nan_plot(df: pd.DataFrame):
+def percent_nan_plot(df: pd.DataFrame, cols: list = None):
+    if cols is not None:
+        df = df[[cols]]
     fig = go.Figure(
         data=go.Bar(x=df.columns, y=(df.isnull().sum() / df.shape[0])),
         layout=go.Layout(
@@ -47,8 +50,10 @@ def percent_nan_plot(df: pd.DataFrame):
 # CLEAN DATA METHODS
 
 
-def correlation_plot(df: pd.DataFrame, column_subset : list = None, column_diff : list = None):
+def correlation_plot(df: pd.DataFrame, cols: list = None):
     """Returns correlation plot for all features in given DataFrame"""
+    if cols is not None:
+        df = df[[cols]]
     if df.isna().sum().sum() > 0:
         warnings.warn(
             "DataFrame contains NaN values, correlations are not well defined (will be infinity)")
@@ -68,8 +73,10 @@ def correlation_plot(df: pd.DataFrame, column_subset : list = None, column_diff 
     return fig
 
 
-def pairwise_plot(df: pd.DataFrame, cols: list):
+def pairwise_plot(df: pd.DataFrame, cols: list = None):
     """Returns pairplot for features listed in cols parameter"""
+    if cols is not None:
+        df = df[[cols]]
     fig = go.Figure(
         data=go.Splom(
             dimensions=[{'label': i, 'values': df[i]} for i in cols],
