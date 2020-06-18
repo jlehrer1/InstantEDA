@@ -47,11 +47,11 @@ def percent_nan_plot(df: pd.DataFrame):
 # CLEAN DATA METHODS
 
 
-def correlation_plot(df: pd.DataFrame):
+def correlation_plot(df: pd.DataFrame, column_subset : list = None, column_diff : list = None):
     """Returns correlation plot for all features in given DataFrame"""
     if df.isna().sum().sum() > 0:
         warnings.warn(
-            "DataFrame contains NaN values, correlations are not well defined")
+            "DataFrame contains NaN values, correlations are not well defined (will be infinity)")
     fig = go.Figure(
         data=go.Heatmap(z=df.corr(), x=df.corr().columns,
                         y=df.corr().columns, hoverongaps=False),
