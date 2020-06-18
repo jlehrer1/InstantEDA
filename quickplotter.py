@@ -64,12 +64,8 @@ class QuickPlotter:
             self._plot(self.plotlist['common'])
         elif subset is not None:
             self._plot(subset)
-        elif diff is not None:
-            self._plot(list(set(self.plotlist) - set(diff)))
         else:
-            raise ValueError(
-                "subset or diff contains improper values. Check plotlist attribute for appropriate values"
-                )
+            self._plot(list(set(self.plotlist) - set(diff)))
 
     def pairwise(self, subset: list = None, diff: list = None, subset_columns: list = None, diff_columns: list = None):
         """Plots each feature X_i against X_j
@@ -85,12 +81,9 @@ class QuickPlotter:
                 self.df_clean, self.df_clean.columns).show()
         elif subset is not None:
             visualization.pairwise_plot(self.df_clean, subset).show()
-        elif diff is not None and set(diff).issubset(set(self.df.columns)):
+        else:
             visualization.pairwise_plot(self.df_clean, list(
                 set(self.df_clean.columns) - set(diff))).show()
-        else:
-            raise ValueError(
-                "feature_subset or feature_diff contain values that are not column names")
 
     # def variance(self, subset: list = None, diff: list = None):
     #     """Plots pairwise variance"""
