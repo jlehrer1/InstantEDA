@@ -69,10 +69,10 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
     return df
 
 
-def clean(df: pd.DataFrame, categorical_all: bool = False, categorical_subset: list = None) -> pd.DataFrame:
+def clean(df: pd.DataFrame, categorical: bool = False, categorical_subset: list = None) -> pd.DataFrame:
     """Returns cleaned DataFrame with ONLY numeric values (can be categorical)
         Usage:
         ------
         prepared_data = clean(raw_data)
     """
-    return impute_data(df, categorical_all, categorical_subset)
+    return _impute_data(df, categorical, categorical_subset)
