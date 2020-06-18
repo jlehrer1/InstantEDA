@@ -5,9 +5,9 @@ from cleaning import clean
 
 
 class QuickPlotter:
-    def __init__(self, df: pd.DataFrame):
+    def __init__(self, df: pd.DataFrame, categorical = True, categorical_subset = None):
         self.df = df
-        self.df_clean = clean.clean(df)  # add ability to change params later
+        self.df_clean = clean.clean(df, categorical=categorical, categorical_subset=categorical_subset)
         self.plotlist = {
             'common': ['num_nan', 'percent_nan', 'correlation'],
             'pairwise': ['pairwise'],
