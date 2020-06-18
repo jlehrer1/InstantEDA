@@ -7,17 +7,15 @@ To guarantee you are using the correct packages, run `pip install -r requirement
 Usage:
 ```python3
 plotter = quickplotter.QuickPlotter(df: pd.DataFrame) #creates a QuickPlotter object with the given DataFrame
+
+plotter.common(subset=['correlation', 'percent_nan']) #plots correlation between features, and percent nan in each column
 ```
 
-Attributes:
-```python3
-self.plotlist 
->>> {
-            'common': ['num_nan', 'percent_nan', 'correlation'],
-            'pairwise': [],
-            'variance': []
-        }
-```
+The quickplot module works mainly with two specifications, `subset` and `diff`. 
+
+For any `subset`-like list, the items in the list will be used. For any `diff`-like list, all items *except* those in the list will be used. 
+
+To specifiy column `subset`'s or `diff`'s, call each plot individually or call `.common` with the `column_subset` or `column_diff` attributes (need to be added as of 6/18/20).
 
 Ideas so far:
 
