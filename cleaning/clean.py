@@ -8,13 +8,13 @@ from sklearn_pandas import CategoricalImputer
 # HELPER FUNCTIONS TO CLEAN DATA
 
 
-def _is_likely_categorical(df_col: pd.Series) -> bool:
+def is_likely_categorical(df_col: pd.Series) -> bool:
     """Heuristic method to check if column is likely categorical. If the ratio between the number of unique and
     total number of rows is small (< 0.05) then the column might be categorical and can be one-hot encoded"""
     return df_col.nunique() / df_col.count() < 0.05
 
 
-def _is_numeric(df_col: pd.Series) -> bool:
+def is_numeric(df_col: pd.Series) -> bool:
     """Checks if the dtype of the given pd.Series is a subtype of np.number"""
     return np.issubdtype(df_col.dtype, np.number)
 
@@ -41,7 +41,7 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
 
     if categorical_all:
         for column in cols_to_use:
-            if _is_likely_categorical(df[column]):
+            if is_likely_categorical(df[column]):
                 warnings.warn(
                     "Column {} is likely categorical, creating dummies... run with categorical=False or categorical_subset=[column names] to disable warning".format(
                         column)
@@ -59,7 +59,7 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
 
     for col in cols_to_use:
         if df[col].isna().sum() > 0:
-            if _is_numeric(df[col]):
+            if is_numeric(df[col]):
                 df[col].fillna(df[col].mean(), inplace=True)
             else:
                 warnings.warn(
@@ -75,4 +75,4 @@ def clean(df: pd.DataFrame, categorical_all: bool = False, categorical_subset: l
         ------
         prepared_data = clean(raw_data)
     """
-    return _impute_data(df, categorical_all, categorical_subset)
+    return impute_data(df, categorical_all, categorical_subset)
