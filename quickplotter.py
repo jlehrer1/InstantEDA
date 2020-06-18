@@ -29,25 +29,37 @@ class QuickPlotter:
             all_plots[plot].show()
 
     def _validity_check(self, subset, diff, subset_columns, diff_columns):
+
         # Checks for subset/diff
         # ------------------------------------------
-        if not (set(subset).issubset(self.plotlist) and set(diff).issubset(self.plotlist)):
-            raise ValueError(
-                "subset or diff contains improper values. Check plotlist attribute for appropriate values")
+        plotlist = self.plotlist
         if subset is not None and diff is not None:
             raise ValueError(
                 "subset and diff cannot both be used."
             )
+        if subset is not None and not set(subset).issubset(plotlist):
+            raise ValueError(
+                "subset contains improper values. Check the plotlist attribute for appropriate ones."    
+            )
+        if diff is not None and not set(diff).issubset(plotlist):
+            raise ValueError(
+                "diff contains improper values. Check the plotlist attribute for appropriate ones."
+            )
 
         # Checks for subset_columns/subset_diff
         # ------------------------------------------
-        if not (set(subset_columns).issubset(self.plotlist) and set(diff_columns).issubset(self.plotlist)):
-            raise ValueError(
-                "subset_columns or subset_diff contain improper values. Check that they only contain valid column names."
-            )
+        col_list = list(self.df.columns)
         if subset_columns is not None and diff_columns is not None:
             raise ValueError(
                 "subset_columns and subset_diff cannot both be used"
+            )
+        if subset_columns is not None and not set(subset_columns).issubset(col_list):
+            raise ValueError(
+                "subset_columns contains improper values. Check that it only contains valid column names"
+            )
+        if diff_columns is not None and not set(diff_columns).issubset(col_list):
+            raise ValueError(
+                "diff_columns contains improper values. Check that it only contains valid column names."
             )
 
     def common(self, subset: list = None, diff: list = None, subset_columns: list = None, diff_columns: list = None):
