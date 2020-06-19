@@ -6,7 +6,6 @@ import warnings
 
 # RAW DATA METHODS
 
-
 def num_nan_plot(df: pd.DataFrame, cols: list = None):
     if cols is not None:
         df = df[[cols]]
