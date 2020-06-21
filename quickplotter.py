@@ -106,7 +106,19 @@ class QuickPlotter:
                 set(self.df_clean.columns) - set(diff))).show()
 
 
-    # def variance(self, subset: list = None, diff: list = None, subset_columns: list = None, diff_columns: list = None):
-    #     """Plots pairwise variance"""
-    #     self._validity_check(subset, diff)
-        
+    def distribution(self, subset: list = None, diff: list = None, subset_columns: list = None, diff_columns: list = None):
+        """ Plots distributions of given DataFrame columns"""
+        self._validity_check(subset, diff, subset_columns, diff_columns)
+
+        # Need to add warning / error checking for plotting non-numerical values
+        if subset is None and diff is None:
+            # Check if all columns are numeric, else raise warning (will error in visualization function)
+            visualization.distribution_plot(self.df_clean, self.df_clean.columns).show()
+        elif subset is not None:
+            visualization.distribution_plot(self.df_clean, subset).show()
+        else:
+            visualization.distribution_plot(self.df_clean, list(
+                set(self.df_clean.columns) - set(diff)))
+
+
+
