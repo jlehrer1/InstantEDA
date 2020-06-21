@@ -2,7 +2,7 @@
 ## Work in progress :)
 Instantly generate common exploratory data plots without having to worry about cleaning your data.
 
-To guarantee you are using the correct packages, run `pip install -r requirements.txt`.
+To guarantee you are using the correct packages, run `pip install -r requirements.txt`. (Will update this to conda before pushing to PyPi)
 
 Usage:
 ```python3

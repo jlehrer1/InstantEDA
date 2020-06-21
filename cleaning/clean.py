@@ -5,8 +5,6 @@ import numpy as np
 from sklearn.impute import KNNImputer, SimpleImputer
 from sklearn_pandas import CategoricalImputer
 
-# HELPER FUNCTIONS TO CLEAN DATA
-
 
 def is_likely_categorical(df_col: pd.Series) -> bool:
     """Heuristic method to check if column is likely categorical. If the ratio between the number of unique and
