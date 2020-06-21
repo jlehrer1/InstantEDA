@@ -19,17 +19,17 @@ To specifiy column `subset`'s or `diff`'s, call each plot individually or call `
 
 Ideas so far:
 
-Number of NaN's in each column  
+Number of NaN's in each column (done)
 
-Percent of Nan's in each column. 
+Percent of Nan's in each column (done)
 
-Correlation matrix. 
+Correlation matrix (done)
 
-distribution matrix for all features?  
+distribution matrix for all features (done)
 
 univariate distribution of each feature (bar + kde for numeric,  just bar for categorical)
 
 time series distribution of numeric features if we can infer a timestamp column (look at: [this](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.infer_objects.html))
 
-pairplot of all  numerical everything if number of columns is manageable
+pairplot of all  numerical everything if number of columns is manageable (done)
 
