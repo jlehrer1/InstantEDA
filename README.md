@@ -1,6 +1,6 @@
 # Instant EDA 
 ## Work in progress :)
-Instantly generate common exploratory data plots.
+Instantly generate common exploratory data plots without having to worry about cleaning your data.
 
 To guarantee you are using the correct packages, run `pip install -r requirements.txt`.
 
