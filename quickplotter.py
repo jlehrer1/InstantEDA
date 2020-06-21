@@ -68,8 +68,18 @@ class QuickPlotter:
                 "diff_columns contains improper values. Check that it only contains valid column names."
             )
 
-    def _numeric_check(df: pd.DataFrame, cols: list):
-        pass
+    def _numeric_check(self, df: pd.DataFrame, cols: list):
+        """Checks to make sure each DataFrame column in the given column list is numeric"""
+
+        # Error check, shouldn't be hit reguarly because of _validity_check
+        if not set(cols).issubset(set(df.columns)):
+            raise ValueError(   
+                "Given column list contains invalid data. Check that only actual column names are passed."
+            )
+        for col in cols:
+            if not clean.is_numeric(df[col]):
+                return False
+        return True
 
     def common(self, subset: list = None, diff: list = None, subset_columns: list = None, diff_columns: list = None):
         """
