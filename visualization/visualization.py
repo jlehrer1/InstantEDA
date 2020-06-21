@@ -1,10 +1,12 @@
 import pandas as pd
 import numpy as np
-import plotly.graph_objects as go
-import plotly.express as px
 import warnings
 
+import plotly.graph_objects as go
+import plotly.express as px
+import plotly.figure_factory as ff
 # RAW DATA METHODS
+
 
 def num_nan_plot(df: pd.DataFrame, cols: list = None):
     if cols is not None:
@@ -25,6 +27,7 @@ def num_nan_plot(df: pd.DataFrame, cols: list = None):
         )
     )
     return fig
+
 
 def percent_nan_plot(df: pd.DataFrame, cols: list = None):
     if cols is not None:
@@ -81,7 +84,28 @@ def pairwise_plot(df: pd.DataFrame, cols: list = None):
             dimensions=[{'label': i, 'values': df[i]} for i in cols],
         ),
         layout=go.Layout(
-            title='Pairwise Matrix Plot',
+            title={
+                'text':'Pairwise Plot',
+                'x': 0.5,
+                'xanchor': 'center',
+                'yanchor': 'top'
+
+            }
         )
+    )
+    return fig
+
+
+def distribution_plot(df: pd.DataFrame, cols: list = None):
+    """ Returns overlayed distributions for the given columns"""
+    l = [df[i] for i in cols]  # generate list of each column as specified by the ff documentation
+    fig = ff.create_distplot(l, cols)
+    fig.update_layout(
+        title={
+            'text': 'Distribution Plot',
+            'x': 0.5,
+            'xanchor': 'center',
+            'yanchor': 'top'
+        }
     )
     return fig
