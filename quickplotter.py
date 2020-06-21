@@ -1,21 +1,18 @@
 import pandas as pd
-
 from visualization import visualization
 from cleaning import clean
 
+
 class QuickPlotter:
-    def __init__(self, df: pd.DataFrame, categorical = True, categorical_subset = None):
+    def __init__(self, df: pd.DataFrame, categorical=True, categorical_subset=None):
         self.df = df
-        self.df_clean = clean.clean(df, categorical=categorical, categorical_subset=categorical_subset)
+        self.df_clean = clean.clean(
+            df, categorical=categorical, categorical_subset=categorical_subset)
         self.plotlist = {
             'common': ['num_nan', 'percent_nan', 'correlation'],
             'pairwise': ['pairwise'],
             'distribution': ['dist']
         }
-
-    #--------------------------------------------------
-    # Wrapper functions for the visualization module
-    #--------------------------------------------------
 
     def _plot(self, plots: list):
         df1 = visualization.num_nan_plot(self.df)
@@ -45,7 +42,7 @@ class QuickPlotter:
             )
         if subset is not None and not set(subset).issubset(plotlist):
             raise ValueError(
-                "subset contains improper values. Check the plotlist attribute for appropriate ones."    
+                "subset contains improper values. Check the plotlist attribute for appropriate ones."
             )
         if diff is not None and not set(diff).issubset(plotlist):
             raise ValueError(
@@ -73,7 +70,7 @@ class QuickPlotter:
 
         # Error check, shouldn't be hit reguarly because of _validity_check
         if not set(cols).issubset(set(df.columns)):
-            raise ValueError(   
+            raise ValueError(
                 "Given column list contains invalid data. Check that only actual column names are passed."
             )
         for col in cols:
@@ -118,7 +115,6 @@ class QuickPlotter:
             visualization.pairwise_plot(self.df_clean, list(
                 set(self.df_clean.columns) - set(diff))).show()
 
-
     def distribution(self, subset: list = None, diff: list = None, subset_columns: list = None, diff_columns: list = None):
         """ Plots distributions of given DataFrame columns"""
         self._validity_check(subset, diff, subset_columns, diff_columns)
@@ -126,12 +122,11 @@ class QuickPlotter:
         # Need to add warning / error checking for plotting non-numerical values
         if subset is None and diff is None:
             # Check if all columns are numeric, else raise warning (will error in visualization function)
-            visualization.distribution_plot(self.df_clean, self.df_clean.columns).show()
+            visualization.distribution_plot(
+                self.df_clean, self.df_clean.columns).show()
         elif subset is not None:
             visualization.distribution_plot(self.df_clean, subset).show()
         else:
             visualization.distribution_plot(self.df_clean, list(
                 set(self.df_clean.columns) - set(diff)))
-
-
 
