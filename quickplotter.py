@@ -31,7 +31,7 @@ class QuickPlotter:
         for plot in plots:
             all_plots[plot].show()
 
-    def _validity_check(self, subset, diff, subset_columns, diff_columns):
+    def _validity_check(self, subset: list, diff: list, subset_columns: list, diff_columns: list):
         """
         Checks each parameter in the QuickPlotter object's methods. 
         It is a private function which will not be of much use outside of the specified functions.
@@ -67,6 +67,9 @@ class QuickPlotter:
             raise ValueError(
                 "diff_columns contains improper values. Check that it only contains valid column names."
             )
+
+    def _numeric_check(df: pd.DataFrame, cols: list):
+        pass
 
     def common(self, subset: list = None, diff: list = None, subset_columns: list = None, diff_columns: list = None):
         """
