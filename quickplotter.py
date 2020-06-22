@@ -11,7 +11,7 @@ class QuickPlotter:
         self.plotlist = {
             'common': ['num_nan', 'percent_nan', 'correlation'],
             'pairwise': ['pairwise'],
-            'distribution': ['dist']
+            'distribution': ['distribution']
         }
 
     def _plot(self, plots: list):
@@ -96,7 +96,7 @@ class QuickPlotter:
         else:
             self._plot(list(set(self.plotlist) - set(diff)))
 
-    def pairwise(self, subset: list = None, diff: list = None, subset_columns: list = None, diff_columns: list = None):
+    def pairwise(self, subset_columns: list = None, diff_columns: list = None):
         """
         Plots each feature X_i against X_j, i=1,...,length(X.columns)
             Parameters
@@ -104,16 +104,16 @@ class QuickPlotter:
                 subset: subset of features to plot
                 diff: plot all features except those in diff
         """
-        self._validity_check(subset, diff, subset_columns, diff_columns)
+        self._validity_check(None, None, subset_columns, diff_columns)
 
-        if subset is None and diff is None:
+        if subset_columns is None and diff_columns is None:
             visualization.pairwise_plot(
                 self.df_clean, self.df_clean.columns).show()
-        elif subset is not None:
-            visualization.pairwise_plot(self.df_clean, subset).show()
+        elif subset_columns is not None:
+            visualization.pairwise_plot(self.df_clean, subset_columns).show()
         else:
             visualization.pairwise_plot(self.df_clean, list(
-                set(self.df_clean.columns) - set(diff))).show()
+                set(self.df_clean.columns) - set(diff_columns))).show()
 
     def distribution(self, subset: list = None, diff: list = None, subset_columns: list = None, diff_columns: list = None):
         """ Plots distributions of given DataFrame columns"""

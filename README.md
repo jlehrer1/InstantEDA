@@ -1,5 +1,4 @@
-# Instant EDA 
-## Work in progress :)
+# Instant EDA (Work in progress!)
 Instantly generate common exploratory data plots without having to worry about cleaning your data.
 
 To setup the proper development environment, run `conda env create -f environment.yml`
@@ -9,6 +8,9 @@ Usage:
 plotter = quickplotter.QuickPlotter(df: pd.DataFrame) #creates a QuickPlotter object with the given DataFrame
 
 plotter.common(subset=['correlation', 'percent_nan']) #plots correlation between features, and percent nan in each column
+
+plotter.distribution(column_subset=df.columns[0:4]) #plots distributions for the first four columns in the DataFrame
+
 ```
 
 The quickplot module works mainly with two specifications, `subset` and `diff`. 
