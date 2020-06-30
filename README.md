@@ -1,6 +1,14 @@
 # Instant EDA (Work in progress!)
 Instantly generate common exploratory data plots without having to worry about cleaning your data.
 
+The code is hosted on PyPi, the Python Package Index
+[here](https://pypi.org/project/quickplotter/0.1/#modal-close).
+
+It can be installed by running 
+```shell
+pip install quickplotter==0.1
+```
+
 To setup the proper development environment, run `conda env create -f environment.yml`
 
 Usage:
