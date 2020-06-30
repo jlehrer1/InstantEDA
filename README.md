@@ -6,7 +6,7 @@ The code is hosted on PyPi, the Python Package Index
 
 It can be installed by running 
 ```shell
-pip install quickplotter==0.1
+pip install quickplotter==0.2
 ```
 
 To setup the proper development environment, run `conda env create -f environment.yml`
