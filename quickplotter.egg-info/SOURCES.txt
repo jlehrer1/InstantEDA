@@ -1,12 +1,10 @@
 .gitattributes
 .gitignore
 LICENSE
-MANIFEST
 README.md
 environment.yml
 setup.cfg
 setup.py
-dist/quickplotter-0.1.tar.gz
 quickplotter/__init__.py
 quickplotter/quickplotter.py
 quickplotter.egg-info/PKG-INFO
@@ -14,6 +12,9 @@ quickplotter.egg-info/SOURCES.txt
 quickplotter.egg-info/dependency_links.txt
 quickplotter.egg-info/requires.txt
 quickplotter.egg-info/top_level.txt
+quickplotter/cleaning/clean.py
+quickplotter/visualization/__init__.py
+quickplotter/visualization/visualization.py
 tests/Companies_filtered.csv
 tests/Overall_Social_Vulnerability.csv
 tests/__init__.py
@@ -25,3 +26,13 @@ tests/test.py
 tests/test1.ipynb
 tests/test2.ipynb
 tests/.ipynb_checkpoints/plot_testing-checkpoint.ipynb
+tests/tests/Companies_filtered.csv
+tests/tests/Overall_Social_Vulnerability.csv
+tests/tests/__init__.py
+tests/tests/companies_filtered_CLEAN.csv
+tests/tests/dengue_features_train.csv
+tests/tests/dengue_features_train_CLEAN.csv
+tests/tests/plot_testing.ipynb
+tests/tests/test.py
+tests/tests/test1.ipynb
+tests/tests/test2.ipynb
