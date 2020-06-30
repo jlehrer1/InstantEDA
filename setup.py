@@ -1,31 +1,21 @@
+import pathlib
 from distutils.core import setup
+import setuptools
+
+# The directory containing this file
+HERE = pathlib.Path(__file__).parent
+
+# The text of the README file
+README = (HERE / "README.md").read_text()
+
 setup(
   name = 'quickplotter',         # How you named your package folder (MyLib)
   packages = ['quickplotter'],   # Chose the same as "name"
   version = '0.1',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
-  description = 'Instantly generate common EDA plots without cleaning your DataFrame',   # Give a short description about your library
-  long_description="""# Instant EDA (Work in progress!)
-	Instantly generate common exploratory data plots without having to worry about cleaning your data.
-
-	To setup the proper development environment, run `conda env create -f environment.yml`
-
-	Usage:
-	```python3
-	plotter = quickplotter.QuickPlotter(df: pd.DataFrame) #creates a QuickPlotter object with the given DataFrame
-	
-	plotter.common(subset=['correlation', 'percent_nan']) #plots correlation between features, and percent nan in each column
-	
-	plotter.distribution(column_subset=df.columns[0:4]) #plots distributions for the first four columns in the DataFrame
-
-	```
-
-	The quickplot module works mainly with two specifications, `subset` and `diff`. 
-
-	For any `subset`-like list, the items in the list will be used. For any `diff`-like list, all items *except* those in the list will be used. 
-
-	To specifiy column `subset`'s or `diff`'s, call each plot individually or call `.common` with the `column_subset` or `column_diff` attributes (need to be added as of 6/18/20).
-	""",
+  description = 'Instantly generate common EDA plots without cleaning your DataFrame',  
+  long_description=README,
+  long_description_content_type="text/markdown",
   author = 'Julian Lehrer',                   # Type in your name
   author_email = 'julianmlehrer@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/jlehrer1/InstantEDA',   # Provide either the link to your github or to your website
@@ -47,4 +37,5 @@ setup(
     'Programming Language :: Python :: 3.5',
     'Programming Language :: Python :: 3.6',
   ],
+  include_package_data=True,
 )
