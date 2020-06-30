@@ -11,6 +11,8 @@ pip install quickplotter==0.3
 
 To setup the proper development environment, run `conda env create -f environment.yml`
 
+Note: To find the most updated documentation, visit the Github [repo](https://github.com/jlehrer1/InstantEDA).
+
 Usage:
 ```python3
 plotter = quickplotter.QuickPlotter(df: pd.DataFrame) #creates a QuickPlotter object with the given DataFrame
