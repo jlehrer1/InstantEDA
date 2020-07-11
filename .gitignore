@@ -2,3 +2,6 @@
 __pycache__
 .vscode/
 .DS_Store
+setup.cfg
+quickplotter.egg-info/
+dist/
