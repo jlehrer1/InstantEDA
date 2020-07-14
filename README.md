@@ -1,4 +1,4 @@
-# Instant EDA (Work in progress!)
+# Instant EDA
 Instantly generate common exploratory data plots without having to worry about cleaning your data.
 
 Todo:
