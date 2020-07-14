@@ -1,5 +1,4 @@
 import sys, os
-sys.path.append(os.path.abspath(".."))
 
 import pandas as pd
 import numpy as np
