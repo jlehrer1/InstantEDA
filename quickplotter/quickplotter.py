@@ -1,11 +1,5 @@
-import sys, os
-sys.path.append(os.path.join(os.path.dirname(__file__), 'visualization'))
-sys.path.append(os.path.join(os.path.dirname(__file__), 'cleaning'))
-
 import pandas as pd
-#from visualization import visualization
 from . import visualization
-#from cleaning import clean
 from . import clean
 
 class QuickPlotter:
