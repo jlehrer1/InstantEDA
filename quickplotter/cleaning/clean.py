@@ -12,7 +12,7 @@ def is_likely_categorical(df_col: pd.Series) -> bool:
     return df_col.nunique() / df_col.count() < 0.05
 
 
-def is_numeric(df_col: pd.Series) -> bool:
+def _is_numeric(df_col: pd.Series) -> bool:
     """Checks if the dtype of the given pd.Series is a subtype of np.number"""
     return np.issubdtype(df_col.dtype, np.number)
 
@@ -27,10 +27,9 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
 
     # try to infer object types, as this will make calculating numeric columns much easier
     df = df.infer_objects()
-    cols_to_use = list(df.columns)
 
     # If there are very few missing values (<= 5%), then just drop those rows and return the DataFrame, as
-    # it should be enough
+    # it should be enough for the provided plots
     if df.isna().sum().sum() / df.shape[0] <= 0.05:
         return df.dropna().get_dummies()
 
@@ -41,14 +40,14 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
             "categorical_all and subset both specified ... using subset and continuing")
         categorical_all = False
 
+    # Try and make dummies for all categorical columns
     if categorical_all:
-        for col in cols_to_use:
+        for col in df.columns:
             likely_categorical_cols = []
             if is_likely_categorical(df[col]):
-                df[col] = catimpute.fit_transform(df[col])
                 df[col] = pd.get_dummies(data=df[col])
+                df[col] = catimpute.fit_transform(df[col])
 
-                cols_to_use.remove(col)
                 likely_categorical_cols.append(col)
             if likely_categorical_cols is not None:
                 warnings.warn(
@@ -56,25 +55,23 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
                         likely_categorical_cols)
                 )
 
+    # Or only make dummies for specified columns
     if categorical_subset is not None:
         for col in categorical_subset:
             # NaN's should be ignored here
             df[col] = pd.get_dummies(data=df[col])
             df[col] = catimpute.fit_transform(df[col])
-            cols_to_use.remove(col)
 
     df.infer_objects()
 
-    # the columns here could not be made categorical (if not specified) and are not numeric
-    # therefore, they cannot be used for numerical analysis such as correlation and distribution
-    # and will be dropped
-    for col in cols_to_use:
+    for col in df.columns:
         if df[col].isna().sum() > 0:
-            if is_numeric(df[col]):
+            if _is_numeric(df[col]):
+                # fill using mean TODO: allow this to be specified
                 df[col].fillna(df[col].mean(), inplace=True)
             else:
                 warnings.warn(
-                    "Column {} cannot be made numeric, dropping and continuing...".format(col))
+                    "Column {} cannot be made numeric, dropping and continuing. If this is incorrect, specify it as categorical or transform to a numeric dtype".format(col))
                 df.drop(col, axis=1, inplace=True)
 
     return df

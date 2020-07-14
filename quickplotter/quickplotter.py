@@ -73,7 +73,7 @@ class QuickPlotter:
                 "Given column list contains invalid data. Check that only actual column names are passed."
             )
         for col in cols:
-            if not clean.is_numeric(df[col]):
+            if not clean._is_numeric(df[col]):
                 return False
         return True
 

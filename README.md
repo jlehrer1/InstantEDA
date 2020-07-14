@@ -1,10 +1,9 @@
 # Instant EDA (Work in progress!)
 Instantly generate common exploratory data plots without having to worry about cleaning your data.
 
-
 Todo:
 - Make sure subset/diff works with slicing
-- Merge each `is_categorical` warning into one.
+- Display pandas summary
 
 The code is hosted on PyPi, the Python Package Index
 [here](https://pypi.org/project/quickplotter/0.3/#modal-close).
@@ -28,7 +27,7 @@ plotter.common(subset=['correlation', 'percent_nan']) #plots correlation between
 
 plotter.distribution(column_subset=df.columns[0:4]) #plots distributions for the first four columns in the DataFrame
 
-plotter.common(column_subset=['body_mass_index', 'blood_type']) # plots common plots for the given columns
+plotter.common(column_subset=['body_mass_index', 'blood_type']) #plots common plots for the given columns
 ```
 
 ## 2. Fundamentals
