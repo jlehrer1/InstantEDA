@@ -42,17 +42,24 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
 
     # Try and make dummies for all categorical columns
     if categorical_all:
+        likely_categorical_cols = []
         for col in df.columns:
-            likely_categorical_cols = []
             if is_likely_categorical(df[col]):
                 df[col] = pd.get_dummies(data=df[col])
                 df[col] = catimpute.fit_transform(df[col])
 
                 likely_categorical_cols.append(col)
-            if likely_categorical_cols is not None:
+        if likely_categorical_cols is not None:
+            # Grammatically correct
+            if len(likely_categorical_cols) > 1:
                 warnings.warn(
-                    "Column(s) {} is likely categorical, creating dummies... run with categorical=False or categorical_subset=[column names] to disable warning".format(
+                    "Columns {} are likely categorical, creating dummies. Run with categorical=False or categorical_subset=[column names] to disable warning".format(
                         likely_categorical_cols)
+                )
+            else:
+                warnings.warn(
+                    "Column \"{}\" is likely categorical, creating dummies. Run with categorical=False or categorical_subset=[column names] to disable warning".format(
+                        likely_categorical_cols[0])
                 )
 
     # Or only make dummies for specified columns
@@ -71,7 +78,7 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
                 df[col].fillna(df[col].mean(), inplace=True)
             else:
                 warnings.warn(
-                    "Column {} cannot be made numeric, dropping and continuing. If this is incorrect, specify it as categorical or transform to a numeric dtype".format(col))
+                    "Column \"{}\" cannot be made numeric, dropping and continuing. If this is incorrect, specify it as categorical or transform to a numeric dtype".format(col))
                 df.drop(col, axis=1, inplace=True)
 
     return df

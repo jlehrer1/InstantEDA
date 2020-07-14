@@ -3,6 +3,7 @@ from visualization import visualization
 from cleaning import clean
 
 class QuickPlotter:
+    # Class initialization
     def __init__(self, df: pd.DataFrame, categorical=True, categorical_subset=None):
         self.df = df
         self.df_clean = clean.clean(
@@ -12,12 +13,17 @@ class QuickPlotter:
             'pairwise': ['pairwise'],
             'distribution': ['distribution']
         }
+    
+    # # # # # # # # # # # # # # # # # # # # 
+    # PRIVATE METHODS FOR ERROR CHECKING  # 
+    # AND DATA VALIDITY                   #
+    # # # # # # # # # # # # # # # # # # # #
 
     def _plot(self, plots: list):
         df1 = visualization.num_nan_plot(self.df)
         df2 = visualization.percent_nan_plot(self.df)
         df3 = visualization.correlation_plot(self.df_clean)
-
+        
         all_plots = {
             'num_nan': df1,
             'percent_nan': df2,
@@ -76,6 +82,12 @@ class QuickPlotter:
             if not clean._is_numeric(df[col]):
                 return False
         return True
+
+    
+    # # # # # # # # # # # # # # # # # # # # 
+    # METHODS FOR CALLING VISUALIZATIONS  # 
+    # ADD SUBSEQUENT PLOTS BELOW          #
+    # # # # # # # # # # # # # # # # # # # #
 
     def common(self, subset: list = None, diff: list = None, subset_columns: list = None, diff_columns: list = None):
         """
