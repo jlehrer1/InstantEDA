@@ -1,6 +1,11 @@
 # Instant EDA (Work in progress!)
 Instantly generate common exploratory data plots without having to worry about cleaning your data.
 
+
+Todo:
+- Make sure subset/diff works with slicing
+- Merge each `is_categorical` warning into one.
+
 The code is hosted on PyPi, the Python Package Index
 [here](https://pypi.org/project/quickplotter/0.3/#modal-close).
 
