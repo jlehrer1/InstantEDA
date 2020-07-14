@@ -42,25 +42,32 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
         categorical_all = False
 
     if categorical_all:
-        for column in cols_to_use:
-            if is_likely_categorical(df[column]):
-                warnings.warn(
-                    "Column {} is likely categorical, creating dummies... run with categorical=False or categorical_subset=[column names] to disable warning".format(
-                        column)
-                )
+        for col in cols_to_use:
+            likely_categorical_cols = []
+            if is_likely_categorical(df[col]):
+                df[col] = catimpute.fit_transform(df[col])
+                df[col] = pd.get_dummies(data=df[col])
 
-                df[column] = catimpute.fit_transform(df[column])
-                df[column] = pd.get_dummies(data=df[column])
-                cols_to_use.remove(column)
+                cols_to_use.remove(col)
+                likely_categorical_cols.append(col)
+            if likely_categorical_cols is not None:
+                warnings.warn(
+                    "Column(s) {} is likely categorical, creating dummies... run with categorical=False or categorical_subset=[column names] to disable warning".format(
+                        likely_categorical_cols)
+                )
 
     if categorical_subset is not None:
         for col in categorical_subset:
-            df[col] = catimpute.fit_transform(df[col])
+            # NaN's should be ignored here
             df[col] = pd.get_dummies(data=df[col])
+            df[col] = catimpute.fit_transform(df[col])
             cols_to_use.remove(col)
 
     df.infer_objects()
-    
+
+    # the columns here could not be made categorical (if not specified) and are not numeric
+    # therefore, they cannot be used for numerical analysis such as correlation and distribution
+    # and will be dropped
     for col in cols_to_use:
         if df[col].isna().sum() > 0:
             if is_numeric(df[col]):
