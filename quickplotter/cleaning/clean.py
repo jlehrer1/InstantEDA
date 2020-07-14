@@ -24,9 +24,13 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
         -------
         dataframe_no_nan = impute_data(dataframe_with_nan)
     """
+
+    # try to infer object types, as this will make calculating numeric columns much easier
     df = df.infer_objects()
     cols_to_use = list(df.columns)
 
+    # If there are very few missing values (<= 5%), then just drop those rows and return the DataFrame, as
+    # it should be enough
     if df.isna().sum().sum() / df.shape[0] <= 0.05:
         return df.dropna().get_dummies()
 
@@ -55,6 +59,8 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
             df[col] = pd.get_dummies(data=df[col])
             cols_to_use.remove(col)
 
+    df.infer_objects()
+    
     for col in cols_to_use:
         if df[col].isna().sum() > 0:
             if is_numeric(df[col]):
@@ -67,10 +73,10 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
     return df
 
 
-def clean(df: pd.DataFrame, categorical: bool = False, categorical_subset: list = None) -> pd.DataFrame:
+def clean(df: pd.DataFrame, categorical_all: bool = False, categorical_subset: list = None) -> pd.DataFrame:
     """Returns cleaned DataFrame with ONLY numeric values (can be categorical)
         Usage:
         ------
         prepared_data = clean(raw_data)
     """
-    return _impute_data(df, categorical, categorical_subset)
+    return _impute_data(df, categorical_all, categorical_subset)
