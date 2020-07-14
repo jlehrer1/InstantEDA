@@ -1,1 +1,0 @@
-from quickplotter import QuickPlotter
