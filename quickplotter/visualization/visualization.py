@@ -1,3 +1,6 @@
+import sys, os
+sys.path.append(os.path.abspath(".."))
+
 import pandas as pd
 import numpy as np
 import warnings
@@ -5,15 +8,8 @@ import warnings
 import plotly.graph_objects as go
 import plotly.express as px
 import plotly.figure_factory as ff
+
 # RAW DATA METHODS
-
-# class Plot:
-#     def __init__(self, df, cols = None, fig_data):
-#         self.df = df
-#         if cols is not None:
-#             self.df = df[[cols]]
-#         self.fig = 
-
 def num_nan_plot(df: pd.DataFrame, cols: list = None):
     if cols is not None:
         df = df[[cols]]

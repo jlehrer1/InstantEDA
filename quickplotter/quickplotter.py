@@ -1,3 +1,6 @@
+import sys, os
+sys.path.append(os.path.abspath("cleaning"))
+sys.path.append(os.path.abspath("visualization"))
 import pandas as pd
 from visualization import visualization
 from cleaning import clean
