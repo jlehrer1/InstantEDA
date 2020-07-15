@@ -5,6 +5,7 @@
 .ipynb_checkpoints/
 __pycache__
 .vscode/
+.pytest_cache
 
 # Package contents (generate with setup.py)
 quickplotter.egg-info/

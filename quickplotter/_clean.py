@@ -49,7 +49,7 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
                 df[col] = catimpute.fit_transform(df[col])
 
                 likely_categorical_cols.append(col)
-        if likely_categorical_cols is not None:
+        if len(likely_categorical_cols) > 0:
             # Grammatically correct
             if len(likely_categorical_cols) > 1:
                 warnings.warn(
