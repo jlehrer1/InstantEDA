@@ -1,8 +1,12 @@
+# MacOS Specific
+.DS_Store
+
+# Python / Jupyter / .vscode
 .ipynb_checkpoints/
 __pycache__
 .vscode/
-.DS_Store
-setup.cfg
+
+# Package contents (generate with setup.py)
 quickplotter.egg-info/
 dist/
 build/
