@@ -15,6 +15,8 @@ conda env create -f environment.yml
 conda update pip
 ```
 
+To run the test suite, run `pytest`.
+
 ## 1. Usage:
 ```python3
 plotter = quickplotter.QuickPlotter(df: pd.DataFrame) #creates a QuickPlotter object with the given DataFrame
