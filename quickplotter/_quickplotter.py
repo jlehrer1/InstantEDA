@@ -1,6 +1,6 @@
 import pandas as pd
-from . import visualization
-from . import clean
+from . import _visualization as visualization
+from . import _clean as clean
 
 class QuickPlotter:
     # Class initialization

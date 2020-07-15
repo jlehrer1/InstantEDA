@@ -53,12 +53,12 @@ def _impute_data(df: pd.DataFrame, categorical_all: bool = False, categorical_su
             # Grammatically correct
             if len(likely_categorical_cols) > 1:
                 warnings.warn(
-                    "Columns {} are likely categorical, creating dummies. Run with categorical=False or categorical_subset=[column names] to disable warning".format(
+                    "Columns {} are likely categorical, creating dummies. Run with categorical=False (to disable all) or categorical_subset=[column names] to disable warning".format(
                         likely_categorical_cols)
                 )
             else:
                 warnings.warn(
-                    "Column \"{}\" is likely categorical, creating dummies. Run with categorical=False or categorical_subset=[column names] to disable warning".format(
+                        "Column \"{}\" is likely categorical, creating dummies. Run with categorical=False (to disable all) or categorical_subset=[column names] to disable warning".format(
                         likely_categorical_cols[0])
                 )
 
