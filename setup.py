@@ -6,12 +6,12 @@ import setuptools
 HERE = pathlib.Path(__file__).parent
 
 # The text of the README file
-README = (HERE / "README.md").read_text()
+README = (HERE / "quickplotter/README.md").read_text()
 
 setup(
   name = 'quickplotter',         # How you named your package folder (MyLib)
   packages = ['quickplotter'],   # Chose the same as "name"
-  version = '0.03',      # Start with a small number and increase it with every change you make
+  version = '1.00',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'Instantly generate common EDA plots without cleaning your DataFrame',  
   long_description=README,
@@ -19,7 +19,6 @@ setup(
   author = 'Julian Lehrer',                   # Type in your name
   author_email = 'julianmlehrer@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/jlehrer1/InstantEDA',   # Provide either the link to your github or to your website
-  #download_url="https://github.com/jlehrer1/InstantEDA/archive/v0.4.tar.gz",
   keywords = ['VISUALIZATION', 'PYTHON', 'DATA SCIENCE'],   # Keywords that define your package best
   install_requires=[            # I get to this in a second
     	'numpy',
