@@ -42,8 +42,3 @@ The options are as follow:
 ## 3. Contributing
 
 If you have read this far I hope you've found this tool useful. I am always looking to learn more and develop as a programmer, so if you have any ideas or contributions, feel free to write a feature or pull request. 
-
-
-
-
-
