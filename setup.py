@@ -11,7 +11,7 @@ README = (HERE / "README.md").read_text()
 setup(
   name = 'quickplotter',         # How you named your package folder (MyLib)
   packages = ['quickplotter'],   # Chose the same as "name"
-  version = '0.9',      # Start with a small number and increase it with every change you make
+  version = '0.03',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'Instantly generate common EDA plots without cleaning your DataFrame',  
   long_description=README,

@@ -1,25 +1,11 @@
 # Instant EDA
 Instantly generate common exploratory data plots without having to worry about cleaning your data.
 
-The code is hosted on PyPi, the Python Package Index
-[here](https://pypi.org/project/quickplotter/0.4/#modal-close).
-
-It can be installed by running 
-```shell
-pip install quickplotter==0.4
-```
-
-To setup the proper development environment, run 
-```
-conda env create -f environment.yml
-conda update pip
-```
-
 Note: To find the most updated documentation, visit the Github [repo](https://github.com/jlehrer1/InstantEDA).
 
 Description: The `quickplotter` module provided here is meant to provide common exploratory data plots without having to worry about cleaning your DataFrame or preanalyzing your data. Additionally, these plots can be exported to `.{png, jpeg}` for use in reports and papers. 
 
-## 1. Usage:
+## 1. Basic Usage:
 ```python3
 plotter = quickplotter.QuickPlotter(df: pd.DataFrame) #creates a QuickPlotter object with the given DataFrame
 
