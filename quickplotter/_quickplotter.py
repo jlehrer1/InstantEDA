@@ -14,11 +14,6 @@ class QuickPlotter:
             'distribution': ['distribution']
         }
     
-    # # # # # # # # # # # # # # # # # # # # 
-    # PRIVATE METHODS FOR ERROR CHECKING  # 
-    # AND DATA VALIDITY                   #
-    # # # # # # # # # # # # # # # # # # # #
-
     def _plot(self, plots: list):
         df1 = visualization.num_nan_plot(self.df)
         df2 = visualization.percent_nan_plot(self.df)
@@ -82,12 +77,6 @@ class QuickPlotter:
             if not clean._is_numeric(df[col]):
                 return False
         return True
-
-    
-    # # # # # # # # # # # # # # # # # # # # 
-    # METHODS FOR CALLING VISUALIZATIONS  # 
-    # ADD SUBSEQUENT PLOTS BELOW          #
-    # # # # # # # # # # # # # # # # # # # #
 
     def common(self, subset: list = None, diff: list = None, subset_columns: list = None, diff_columns: list = None):
         """

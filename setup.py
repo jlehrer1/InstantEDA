@@ -21,13 +21,12 @@ setup(
   url = 'https://github.com/jlehrer1/InstantEDA',   # Provide either the link to your github or to your website
   keywords = ['VISUALIZATION', 'PYTHON', 'DATA SCIENCE'],   # Keywords that define your package best
   install_requires=[            # I get to this in a second
-    	'numpy',
+    'numpy',
 		'pandas',
 		'plotly',
 		'numpy',
-                'scikit-learn',
-                'sklearn-pandas'
-                ],
+    'scikit-learn',
+    'sklearn-pandas'],
   classifiers=[
     'Development Status :: 3 - Alpha',      # Chose either "3 - Alpha", "4 - Beta" or "5 - Production/Stable" as the current state of your package
     'Intended Audience :: Developers',      # Define that your audience are developers
